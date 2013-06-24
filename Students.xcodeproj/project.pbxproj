@@ -19,9 +19,7 @@
 		8FFAA13F1778531B0009C807 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FFAA13E1778531B0009C807 /* MasterViewController.m */; };
 		8FFAA1421778531B0009C807 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FFAA1411778531B0009C807 /* DetailViewController.m */; };
 		8FFAA1451778531B0009C807 /* MasterViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FFAA1431778531B0009C807 /* MasterViewController_iPhone.xib */; };
-		8FFAA1481778531B0009C807 /* MasterViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FFAA1461778531B0009C807 /* MasterViewController_iPad.xib */; };
 		8FFAA14B1778531B0009C807 /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FFAA1491778531B0009C807 /* DetailViewController_iPhone.xib */; };
-		8FFAA14E1778531B0009C807 /* DetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FFAA14C1778531B0009C807 /* DetailViewController_iPad.xib */; };
 		8FFAA1561778553B0009C807 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FFAA1541778553B0009C807 /* CoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -44,9 +42,7 @@
 		8FFAA1401778531B0009C807 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		8FFAA1411778531B0009C807 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		8FFAA1441778531B0009C807 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController_iPhone.xib; sourceTree = "<group>"; };
-		8FFAA1471778531B0009C807 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController_iPad.xib; sourceTree = "<group>"; };
 		8FFAA14A1778531B0009C807 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController_iPhone.xib; sourceTree = "<group>"; };
-		8FFAA14D1778531B0009C807 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController_iPad.xib; sourceTree = "<group>"; };
 		8FFAA1551778553B0009C807 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,9 +98,7 @@
 				8FFAA1401778531B0009C807 /* DetailViewController.h */,
 				8FFAA1411778531B0009C807 /* DetailViewController.m */,
 				8FFAA1431778531B0009C807 /* MasterViewController_iPhone.xib */,
-				8FFAA1461778531B0009C807 /* MasterViewController_iPad.xib */,
 				8FFAA1491778531B0009C807 /* DetailViewController_iPhone.xib */,
-				8FFAA14C1778531B0009C807 /* DetailViewController_iPad.xib */,
 				8FFAA12C1778531B0009C807 /* Supporting Files */,
 			);
 			path = Students;
@@ -180,9 +174,7 @@
 				8FFAA13A1778531B0009C807 /* Default@2x.png in Resources */,
 				8FFAA13C1778531B0009C807 /* Default-568h@2x.png in Resources */,
 				8FFAA1451778531B0009C807 /* MasterViewController_iPhone.xib in Resources */,
-				8FFAA1481778531B0009C807 /* MasterViewController_iPad.xib in Resources */,
 				8FFAA14B1778531B0009C807 /* DetailViewController_iPhone.xib in Resources */,
-				8FFAA14E1778531B0009C807 /* DetailViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,28 +212,12 @@
 			name = MasterViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
-		8FFAA1461778531B0009C807 /* MasterViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8FFAA1471778531B0009C807 /* en */,
-			);
-			name = MasterViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
 		8FFAA1491778531B0009C807 /* DetailViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8FFAA14A1778531B0009C807 /* en */,
 			);
 			name = DetailViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		8FFAA14C1778531B0009C807 /* DetailViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8FFAA14D1778531B0009C807 /* en */,
-			);
-			name = DetailViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -344,6 +320,7 @@
 				8FFAA1531778531B0009C807 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
