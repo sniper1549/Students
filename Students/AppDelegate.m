@@ -144,5 +144,25 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
++ (BOOL)isLounchingFirstTime{
+    static BOOL flag=NO;
+    static BOOL result;
+    if(!flag){
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunchedOnce"])
+        {
+            result=NO;
+        }
+        else
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunchedOnce"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            result=YES;
+        }
+        
+        flag=YES;
+    }
+    return result;
+}
+
 
 @end

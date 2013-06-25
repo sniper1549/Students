@@ -53,8 +53,10 @@
 - (void) initView
 {
     [self initNavBar];
-    
-    [self synchronizeWithServer];
+        
+    if([AppDelegate isLounchingFirstTime]){
+        [self synchronizeWithServer];
+    }
 }
 
 - (void) initNavBar

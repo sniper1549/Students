@@ -21,5 +21,6 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory;
++ (BOOL)isLounchingFirstTime;
 
 @end
