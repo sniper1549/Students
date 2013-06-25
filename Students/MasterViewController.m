@@ -7,25 +7,31 @@
 //
 
 #import "MasterViewController.h"
-
 #import "DetailViewController.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+#import "AppDelegate.h"
+#import <CoreData/CoreData.h>
 
 @interface MasterViewController () {
-    NSMutableArray *_objects;
+    NSMutableArray *_objects;    
 }
+
+- (void) initView;
+- (void) initNavBar;
+- (void) synchronizeWithServer;
+
 @end
 
 @implementation MasterViewController
+
+#define kServerUrl @"https://dl.dropboxusercontent.com/u/35263683/data.json"
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            self.clearsSelectionOnViewWillAppear = NO;
-            self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-        }
+        self.title = NSLocalizedString(@"Students", @"Students");
     }
     return self;
 }
@@ -40,12 +46,73 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    [self initView];
+}
 
+- (void) initView
+{
+    [self initNavBar];
+    
+    [self synchronizeWithServer];
+}
+
+- (void) initNavBar
+{
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
     UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)] autorelease];
     self.navigationItem.rightBarButtonItem = addButton;
 }
+
+- (void) synchronizeWithServer
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:kServerUrl]];
+     
+     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+     
+     if (data)
+     {
+        self->_objects = data == nil ? nil : [data objectFromJSONData];
+         
+         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+         NSManagedObjectContext *context = [delegate managedObjectContext];
+         
+        for(int i=0;i<[self->_objects count];i++){
+            NSLog(@"%@",[self->_objects objectAtIndex:i]);
+            
+            NSManagedObject *record = [NSEntityDescription insertNewObjectForEntityForName:@"Students" inManagedObjectContext:context];
+            
+            
+            NSNumber *ageNum = [[self->_objects objectAtIndex:i] valueForKey:@"age"];
+            NSString *name = [[self->_objects objectAtIndex:i] valueForKey:@"name"];
+            NSString *hobby = [[self->_objects objectAtIndex:i] valueForKey:@"hobby"];
+            
+            [record setValue:ageNum forKey:@"age"];
+            [record setValue:name forKey:@"name"];
+            [record setValue:hobby forKey:@"hobby"];
+            
+
+            NSError *err;
+            
+            if( ! [context save:&err] ){
+                NSLog(@"Cannot save data: %@", [err localizedDescription]);
+            }
+
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }
+     }
+     else
+     {
+     
+     }
+    }];
+    
+    [request release];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -110,21 +177,6 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

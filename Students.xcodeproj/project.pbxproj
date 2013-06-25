@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8FEC84171779892500061EB1 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC84131779892500061EB1 /* JSONKit.m */; };
+		8FEC84181779892500061EB1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC84161779892500061EB1 /* MBProgressHUD.m */; };
+		8FEC841D1779A0F500061EB1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FEC841C1779A0F500061EB1 /* CoreData.framework */; };
 		8FFAA1261778531B0009C807 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFAA1251778531B0009C807 /* UIKit.framework */; };
 		8FFAA1281778531B0009C807 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFAA1271778531B0009C807 /* Foundation.framework */; };
 		8FFAA12A1778531B0009C807 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFAA1291778531B0009C807 /* CoreGraphics.framework */; };
@@ -24,6 +27,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8FEC84121779892500061EB1 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		8FEC84131779892500061EB1 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		8FEC84151779892500061EB1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		8FEC84161779892500061EB1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		8FEC841C1779A0F500061EB1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8FFAA1221778531B0009C807 /* Students.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Students.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FFAA1251778531B0009C807 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8FFAA1271778531B0009C807 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -37,10 +45,10 @@
 		8FFAA1371778531B0009C807 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8FFAA1391778531B0009C807 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		8FFAA13B1778531B0009C807 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		8FFAA13D1778531B0009C807 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		8FFAA13E1778531B0009C807 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		8FFAA1401778531B0009C807 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		8FFAA1411778531B0009C807 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		8FFAA13D1778531B0009C807 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MasterViewController.h; path = ../../MasterViewController.h; sourceTree = "<group>"; };
+		8FFAA13E1778531B0009C807 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MasterViewController.m; path = ../../MasterViewController.m; sourceTree = "<group>"; };
+		8FFAA1401778531B0009C807 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = ../../DetailViewController.h; sourceTree = "<group>"; };
+		8FFAA1411778531B0009C807 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = ../../DetailViewController.m; sourceTree = "<group>"; };
 		8FFAA1441778531B0009C807 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController_iPhone.xib; sourceTree = "<group>"; };
 		8FFAA14A1778531B0009C807 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController_iPhone.xib; sourceTree = "<group>"; };
 		8FFAA1551778553B0009C807 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -51,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FEC841D1779A0F500061EB1 /* CoreData.framework in Frameworks */,
 				8FFAA1261778531B0009C807 /* UIKit.framework in Frameworks */,
 				8FFAA1281778531B0009C807 /* Foundation.framework in Frameworks */,
 				8FFAA12A1778531B0009C807 /* CoreGraphics.framework in Frameworks */,
@@ -60,9 +69,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8FEC84101779892500061EB1 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				8FEC84111779892500061EB1 /* JSON */,
+				8FEC84141779892500061EB1 /* LoaderBar */,
+			);
+			name = Libs;
+			path = libs;
+			sourceTree = "<group>";
+		};
+		8FEC84111779892500061EB1 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				8FEC84121779892500061EB1 /* JSONKit.h */,
+				8FEC84131779892500061EB1 /* JSONKit.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		8FEC84141779892500061EB1 /* LoaderBar */ = {
+			isa = PBXGroup;
+			children = (
+				8FEC84151779892500061EB1 /* MBProgressHUD.h */,
+				8FEC84161779892500061EB1 /* MBProgressHUD.m */,
+			);
+			path = LoaderBar;
+			sourceTree = "<group>";
+		};
+		8FEC84191779893400061EB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8FEC841A1779893400061EB1 /* DetailView */,
+				8FEC841B1779893400061EB1 /* MainView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8FEC841A1779893400061EB1 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				8FFAA1401778531B0009C807 /* DetailViewController.h */,
+				8FFAA1411778531B0009C807 /* DetailViewController.m */,
+				8FFAA1491778531B0009C807 /* DetailViewController_iPhone.xib */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		8FEC841B1779893400061EB1 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				8FFAA13D1778531B0009C807 /* MasterViewController.h */,
+				8FFAA13E1778531B0009C807 /* MasterViewController.m */,
+				8FFAA1431778531B0009C807 /* MasterViewController_iPhone.xib */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
 		8FFAA1191778531B0009C807 = {
 			isa = PBXGroup;
 			children = (
+				8FEC841C1779A0F500061EB1 /* CoreData.framework */,
 				8FFAA12B1778531B0009C807 /* Students */,
 				8FFAA1241778531B0009C807 /* Frameworks */,
 				8FFAA1231778531B0009C807 /* Products */,
@@ -90,15 +157,11 @@
 		8FFAA12B1778531B0009C807 /* Students */ = {
 			isa = PBXGroup;
 			children = (
+				8FEC84191779893400061EB1 /* Views */,
+				8FEC84101779892500061EB1 /* Libs */,
 				8FFAA1541778553B0009C807 /* CoreData.xcdatamodeld */,
 				8FFAA1341778531B0009C807 /* AppDelegate.h */,
 				8FFAA1351778531B0009C807 /* AppDelegate.m */,
-				8FFAA13D1778531B0009C807 /* MasterViewController.h */,
-				8FFAA13E1778531B0009C807 /* MasterViewController.m */,
-				8FFAA1401778531B0009C807 /* DetailViewController.h */,
-				8FFAA1411778531B0009C807 /* DetailViewController.m */,
-				8FFAA1431778531B0009C807 /* MasterViewController_iPhone.xib */,
-				8FFAA1491778531B0009C807 /* DetailViewController_iPhone.xib */,
 				8FFAA12C1778531B0009C807 /* Supporting Files */,
 			);
 			path = Students;
@@ -190,6 +253,8 @@
 				8FFAA13F1778531B0009C807 /* MasterViewController.m in Sources */,
 				8FFAA1421778531B0009C807 /* DetailViewController.m in Sources */,
 				8FFAA1561778553B0009C807 /* CoreData.xcdatamodeld in Sources */,
+				8FEC84171779892500061EB1 /* JSONKit.m in Sources */,
+				8FEC84181779892500061EB1 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +275,7 @@
 				8FFAA1441778531B0009C807 /* en */,
 			);
 			name = MasterViewController_iPhone.xib;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		8FFAA1491778531B0009C807 /* DetailViewController_iPhone.xib */ = {
@@ -218,6 +284,7 @@
 				8FFAA14A1778531B0009C807 /* en */,
 			);
 			name = DetailViewController_iPhone.xib;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
