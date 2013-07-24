@@ -2,14 +2,13 @@
 //  DetailViewController.m
 //  Students
 //
-//  Created by Michael Redko on 6/24/13.
+//  Created by Michael Redko on 7/24/13.
 //  Copyright (c) 2013 Michael Redko. All rights reserved.
 //
 
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
-@property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
 @end
 
@@ -19,7 +18,6 @@
 {
     [_detailItem release];
     [_detailDescriptionLabel release];
-    [_masterPopoverController release];
     [super dealloc];
 }
 
@@ -34,10 +32,6 @@
         // Update the view.
         [self configureView];
     }
-
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
 }
 
 - (void)configureView
@@ -71,20 +65,4 @@
     return self;
 }
 							
-#pragma mark - Split view
-
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
-{
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    self.masterPopoverController = popoverController;
-}
-
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    self.masterPopoverController = nil;
-}
-
 @end

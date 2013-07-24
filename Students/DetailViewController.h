@@ -2,13 +2,13 @@
 //  DetailViewController.h
 //  Students
 //
-//  Created by Michael Redko on 6/24/13.
+//  Created by Michael Redko on 7/24/13.
 //  Copyright (c) 2013 Michael Redko. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) id detailItem;
 

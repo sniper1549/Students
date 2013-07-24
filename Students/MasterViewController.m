@@ -2,7 +2,7 @@
 //  MasterViewController.m
 //  Students
 //
-//  Created by Michael Redko on 6/24/13.
+//  Created by Michael Redko on 7/24/13.
 //  Copyright (c) 2013 Michael Redko. All rights reserved.
 //
 
@@ -14,12 +14,14 @@
 #import <CoreData/CoreData.h>
 
 @interface MasterViewController () {
-    NSMutableArray *_objects;    
+        NSMutableArray *_objects;
 }
 
 - (void) initView;
 - (void) initNavBar;
 - (void) synchronizeWithServer;
+- (void) createEntitiesByData: (NSData*) data;
+- (void) showSynchronizeErrorMessage;
 
 @end
 
@@ -35,7 +37,7 @@
     }
     return self;
 }
-							
+
 - (void)dealloc
 {
     [_detailViewController release];
@@ -53,7 +55,7 @@
 - (void) initView
 {
     [self initNavBar];
-        
+    
     if([AppDelegate isLounchingFirstTime]){
         [self synchronizeWithServer];
     }
@@ -69,53 +71,68 @@
 
 - (void) synchronizeWithServer
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:kServerUrl]];
-     
-     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-     
-     if (data)
-     {
-        self->_objects = data == nil ? nil : [data objectFromJSONData];
-         
-         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-         NSManagedObjectContext *context = [delegate managedObjectContext];
-         
-        for(int i=0;i<[self->_objects count];i++){
-            NSLog(@"%@",[self->_objects objectAtIndex:i]);
-            
-            NSManagedObject *record = [NSEntityDescription insertNewObjectForEntityForName:@"Students" inManagedObjectContext:context];
-            
-            
-            NSNumber *ageNum = [[self->_objects objectAtIndex:i] valueForKey:@"age"];
-            NSString *name = [[self->_objects objectAtIndex:i] valueForKey:@"name"];
-            NSString *hobby = [[self->_objects objectAtIndex:i] valueForKey:@"hobby"];
-            
-            [record setValue:ageNum forKey:@"age"];
-            [record setValue:name forKey:@"name"];
-            [record setValue:hobby forKey:@"hobby"];
-            
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading";
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 
-            NSError *err;
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:kServerUrl]];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             
-            if( ! [context save:&err] ){
-                NSLog(@"Cannot save data: %@", [err localizedDescription]);
+            if (data)
+            {
+                [self createEntitiesByData:data];
             }
-
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        }
-     }
-     else
-     {
-     
-     }
-    }];
-    
-    [request release];
+            else
+            {
+                [self showSynchronizeErrorMessage];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [hud hide:YES];
+            });
+        }];
+        [request release];
+        
+    });
 }
 
+- (void) createEntitiesByData: (NSData*) data
+{
+    self->_objects = data == nil ? nil : [data objectFromJSONData];
+    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [delegate managedObjectContext];
+    
+    for(int i=0;i<[self->_objects count];i++){
+        NSLog(@"%@",[self->_objects objectAtIndex:i]);
+        
+        NSManagedObject *record = [NSEntityDescription insertNewObjectForEntityForName:@"Students" inManagedObjectContext:context];
+        
+        
+        NSNumber *ageNum = [[self->_objects objectAtIndex:i] valueForKey:@"age"];
+        NSString *name = [[self->_objects objectAtIndex:i] valueForKey:@"name"];
+        NSString *hobby = [[self->_objects objectAtIndex:i] valueForKey:@"hobby"];
+        
+        [record setValue:ageNum forKey:@"age"];
+        [record setValue:name forKey:@"name"];
+        [record setValue:hobby forKey:@"hobby"];
+        
+        
+        NSError *err;
+        
+        if( ! [context save:&err] ){
+            NSLog(@"Cannot save data: %@", [err localizedDescription]);
+        }                
+    }
+}
 
+- (void) showSynchronizeErrorMessage
+{
+    UIAlertView* alert;
+    alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Synchronization error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    [alert release];    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -156,8 +173,8 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
-
-
+    
+    
     NSDate *object = _objects[indexPath.row];
     cell.textLabel.text = [object description];
     return cell;

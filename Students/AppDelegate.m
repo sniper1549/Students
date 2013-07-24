@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  Students
 //
-//  Created by Michael Redko on 6/24/13.
+//  Created by Michael Redko on 7/24/13.
 //  Copyright (c) 2013 Michael Redko. All rights reserved.
 //
 
@@ -20,12 +20,11 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-
 - (void)dealloc
 {
     [_window release];
     [_navigationController release];
-    [_splitViewController release];    
+    [_splitViewController release];
     [_managedObjectContext release];
     [_managedObjectModel release];
     [_persistentStoreCoordinator release];
@@ -37,7 +36,7 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        MasterViewController *masterViewController = [[[MasterViewController alloc] initWithNibName:@"MasterViewController_iPhone" bundle:nil] autorelease];
+        MasterViewController *masterViewController = [[[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil] autorelease];
         self.navigationController = [[[UINavigationController alloc] initWithRootViewController:masterViewController] autorelease];
         self.window.rootViewController = self.navigationController;
     } else {
@@ -67,7 +66,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -130,7 +129,7 @@
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-
+        
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
@@ -163,6 +162,5 @@
     }
     return result;
 }
-
 
 @end
