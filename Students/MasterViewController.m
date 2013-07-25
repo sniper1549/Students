@@ -11,21 +11,26 @@
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
+#import "Students.h"
 #import <CoreData/CoreData.h>
 
-@interface MasterViewController () {
-        NSMutableArray *_objects;
-}
+@interface MasterViewController ()
+
+@property (nonatomic,retain)  NSArray *tableData;
+
 
 - (void) initView;
 - (void) initNavBar;
 - (void) synchronizeWithServer;
 - (void) createEntitiesByData: (NSData*) data;
 - (void) showSynchronizeErrorMessage;
+- (void) fillDataTable;
 
 @end
 
 @implementation MasterViewController
+
+@synthesize tableData;
 
 #define kServerUrl @"https://dl.dropboxusercontent.com/u/35263683/data.json"
 
@@ -40,8 +45,9 @@
 
 - (void)dealloc
 {
-    [_detailViewController release];
-    [_objects release];
+    self.detailViewController = nil;
+    self.tableData = nil;
+    
     [super dealloc];
 }
 
@@ -58,7 +64,23 @@
     
     if([AppDelegate isLounchingFirstTime]){
         [self synchronizeWithServer];
+    }else{
+        [self fillDataTable];
     }
+}
+
+- (void) fillDataTable
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [delegate managedObjectContext];
+    
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Students" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    self.tableData = [context executeFetchRequest:fetchRequest error:&error];
+    
+    [fetchRequest release];
 }
 
 - (void) initNavBar
@@ -79,16 +101,16 @@
         
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             
-            if (data)
-            {
+            if (data){
                 [self createEntitiesByData:data];
-            }
-            else
-            {
+                [self fillDataTable];
+                
+            }else {
                 [self showSynchronizeErrorMessage];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [hud hide:YES];
+                [self.tableView reloadData];
             });
         }];
         [request release];
@@ -98,26 +120,20 @@
 
 - (void) createEntitiesByData: (NSData*) data
 {
-    self->_objects = data == nil ? nil : [data objectFromJSONData];
+    NSMutableArray *objects = data == nil ? nil : [data objectFromJSONData];
     
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [delegate managedObjectContext];
     
-    for(int i=0;i<[self->_objects count];i++){
-        NSLog(@"%@",[self->_objects objectAtIndex:i]);
+    for(int i=0;i<[objects count];i++){
         
-        NSManagedObject *record = [NSEntityDescription insertNewObjectForEntityForName:@"Students" inManagedObjectContext:context];
+        Students *student = [NSEntityDescription
+                             insertNewObjectForEntityForName:@"Students" inManagedObjectContext:context];
         
-        
-        NSNumber *ageNum = [[self->_objects objectAtIndex:i] valueForKey:@"age"];
-        NSString *name = [[self->_objects objectAtIndex:i] valueForKey:@"name"];
-        NSString *hobby = [[self->_objects objectAtIndex:i] valueForKey:@"hobby"];
-        
-        [record setValue:ageNum forKey:@"age"];
-        [record setValue:name forKey:@"name"];
-        [record setValue:hobby forKey:@"hobby"];
-        
-        
+        student.age = [[objects objectAtIndex:i] valueForKey:@"age"];
+        student.name = [[objects objectAtIndex:i] valueForKey:@"name"];
+        student.hobby = [[objects objectAtIndex:i] valueForKey:@"hobby"];
+                        
         NSError *err;
         
         if( ! [context save:&err] ){
@@ -136,17 +152,16 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)insertNewObject:(id)sender
 {
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
+   /* if (!tableData) {
+        tableData = [[NSMutableArray alloc] init];
     }
-    [_objects insertObject:[NSDate date] atIndex:0];
+    [tableData insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];*/
 }
 
 #pragma mark - Table View
@@ -158,7 +173,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return tableData.count;
 }
 
 // Customize the appearance of table view cells.
@@ -174,9 +189,9 @@
         }
     }
     
-    
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    Students *s = [self.tableData objectAtIndex:indexPath.row];
+    cell.textLabel.text = s.name;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -188,18 +203,17 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
+    /*if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [tableData removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
+    }*/
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = _objects[indexPath.row];
+    NSDate *object = tableData[indexPath.row];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 	    if (!self.detailViewController) {
 	        self.detailViewController = [[[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil] autorelease];
