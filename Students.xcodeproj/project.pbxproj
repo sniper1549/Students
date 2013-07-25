@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8F32B08917A126B900CD1216 /* Students.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F32B08817A126B900CD1216 /* Students.m */; };
+		8F32B08D17A1666300CD1216 /* DetailViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F32B08C17A1666300CD1216 /* DetailViewController_iPhone5.xib */; };
 		8F45B21B179FE0F2008ACF95 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F45B21A179FE0F2008ACF95 /* UIKit.framework */; };
 		8F45B21D179FE0F2008ACF95 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F45B21C179FE0F2008ACF95 /* Foundation.framework */; };
 		8F45B21F179FE0F2008ACF95 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F45B21E179FE0F2008ACF95 /* CoreGraphics.framework */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		8F32B08717A126B900CD1216 /* Students.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Students.h; sourceTree = "<group>"; };
 		8F32B08817A126B900CD1216 /* Students.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Students.m; sourceTree = "<group>"; };
+		8F32B08C17A1666300CD1216 /* DetailViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController_iPhone5.xib; path = ../DetailViewController_iPhone5.xib; sourceTree = "<group>"; };
 		8F45B217179FE0F2008ACF95 /* Students.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Students.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F45B21A179FE0F2008ACF95 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8F45B21C179FE0F2008ACF95 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,6 +123,7 @@
 				8F45B235179FE0F2008ACF95 /* DetailViewController.h */,
 				8F45B236179FE0F2008ACF95 /* DetailViewController.m */,
 				8F45B238179FE0F2008ACF95 /* MasterViewController.xib */,
+				8F32B08C17A1666300CD1216 /* DetailViewController_iPhone5.xib */,
 				8F45B23B179FE0F2008ACF95 /* DetailViewController.xib */,
 				8F45B221179FE0F2008ACF95 /* Supporting Files */,
 				8F45B24E179FFC28008ACF95 /* CoreData.xcdatamodeld */,
@@ -226,6 +229,7 @@
 				8F45B231179FE0F2008ACF95 /* Default-568h@2x.png in Resources */,
 				8F45B23A179FE0F2008ACF95 /* MasterViewController.xib in Resources */,
 				8F45B23D179FE0F2008ACF95 /* DetailViewController.xib in Resources */,
+				8F32B08D17A1666300CD1216 /* DetailViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,14 +31,16 @@
 @implementation MasterViewController
 
 @synthesize tableData;
+@synthesize detailViewController;
 
 #define kServerUrl @"https://dl.dropboxusercontent.com/u/35263683/data.json"
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Students", @"Students");
+        self.title = NSLocalizedString(@"Back", @"Back");
     }
     return self;
 }
@@ -84,9 +86,7 @@
 }
 
 - (void) initNavBar
-{
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
+{    
     UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)] autorelease];
     self.navigationItem.rightBarButtonItem = addButton;
 }
@@ -213,15 +213,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = tableData[indexPath.row];
+    
+    NSString *nibName =IS_IPHONE_5 ? @"DetailViewController_iPhone5"
+                        : @"DetailViewController";
+    
+           
+    Students *student = tableData[indexPath.row];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 	    if (!self.detailViewController) {
-	        self.detailViewController = [[[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil] autorelease];
+	        self.detailViewController = [[[DetailViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
 	    }
-	    self.detailViewController.detailItem = object;
+	    self.detailViewController.selectedItem = student;
         [self.navigationController pushViewController:self.detailViewController animated:YES];
     } else {
-        self.detailViewController.detailItem = object;
+        self.detailViewController.selectedItem = student;
     }
 }
 

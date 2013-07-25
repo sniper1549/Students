@@ -9,15 +9,22 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
-- (void)configureView;
+
+
 @end
 
 @implementation DetailViewController
 
+@synthesize teName;
+@synthesize teHobby;
+
+
 - (void)dealloc
 {
-    [_detailItem release];
-    [_detailDescriptionLabel release];
+    self.selectedItem = nil;
+
+    self.teName = nil;
+    self.teHobby = nil;
     [super dealloc];
 }
 
@@ -25,35 +32,32 @@
 
 - (void)setDetailItem:(id)newDetailItem
 {
-    if (_detailItem != newDetailItem) {
+  /*  if (_detailItem != newDetailItem) {
         [_detailItem release];
         _detailItem = [newDetailItem retain];
 
         // Update the view.
-        [self configureView];
-    }
+    }*/
 }
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+    if (self.selectedItem) {
+        self.teName.text = self.selectedItem.name;
+        self.teHobby.text = self.selectedItem.hobby;
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
     [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -65,4 +69,9 @@
     return self;
 }
 							
+- (void)viewDidUnload {
+    [self setTeName:nil];
+    [self setTeHobby:nil];
+    [super viewDidUnload];
+}
 @end

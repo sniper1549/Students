@@ -12,6 +12,6 @@
 
 @interface MasterViewController : UITableViewController
 
-@property (strong, nonatomic) DetailViewController *detailViewController;
+@property (retain, nonatomic) DetailViewController *detailViewController;
 
 @end

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Students.h"
 
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) id detailItem;
+@property (retain, nonatomic) IBOutlet UITextField *teName;
+@property (retain, nonatomic) IBOutlet UITextField *teHobby;
 
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) Students *selectedItem;
 
 @end
