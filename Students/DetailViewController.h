@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Students.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UIPickerViewDataSource, UIPageViewControllerDelegate, UIPickerViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *teName;
 @property (retain, nonatomic) IBOutlet UITextField *teHobby;
 
+@property (retain, nonatomic) IBOutlet UIPickerView *piYears;
 @property (strong, nonatomic) Students *selectedItem;
 
 @end

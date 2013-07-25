@@ -40,7 +40,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Back", @"Back");
+        self.title = NSLocalizedString(@"Students list", @"Students list");
     }
     return self;
 }
@@ -81,6 +81,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Students" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     self.tableData = [context executeFetchRequest:fetchRequest error:&error];
+
     
     [fetchRequest release];
 }
