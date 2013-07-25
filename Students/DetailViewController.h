@@ -17,4 +17,6 @@
 @property (retain, nonatomic) IBOutlet UIPickerView *piYears;
 @property (strong, nonatomic) Students *selectedItem;
 
+- (IBAction)teDoneEditing:(id)sender;
+
 @end

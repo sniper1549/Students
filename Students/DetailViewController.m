@@ -56,7 +56,7 @@
         for(int i=1;i<=100;i++){
             [self.yearsArray addObject:[NSNumber numberWithInt:i]];
         }
-        
+                    
         [self.piYears selectRow:[self.selectedItem.age integerValue]-1 inComponent:0 animated:NO];
         
         self.navigationItem.title = self.selectedItem.name;
@@ -80,11 +80,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self configureView];
-    
-    
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,5 +119,8 @@
     [self setTeHobby:nil];
     [self setPiYears:nil];
     [super viewDidUnload];
+}
+- (IBAction)teDoneEditing:(id)sender {
+    [sender resignFirstResponder];
 }
 @end
